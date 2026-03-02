@@ -104,7 +104,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
         <div className="bg-[#0d0d0d] rounded-b-lg border border-t-0 border-white/10 p-6 min-h-[320px]">
           {/* Boot Header */}
           <div className="mb-4">
-            <pre className="font-mono text-xs text-azure/60">
+            <pre className="font-mono text-xs" style={{ color: '#0089DB' }}>
 {`
   ____              _____            _____           _       _   
  |  _ \\  ___ _ __ | ____|_  ___ __ | ____|_ __ ___ | |__   | |  
@@ -123,18 +123,19 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
                 key={index}
                 className="flex items-center justify-between font-mono text-sm animate-slide-up"
               >
-                <span className="terminal-text flex items-center gap-2">
-                  <span className="text-white/40">[{String(index + 1).padStart(2, '0')}]</span>
+                <span className="terminal-text flex items-center gap-2" style={{ color: '#575757' }}>
+                  <span style={{ color: '#0089DB' }}>[{String(index + 1).padStart(2, '0')}]</span>
                   {line.text}
                 </span>
                 <span
-                  className={`text-xs px-2 py-0.5 rounded ${
+                  className={`text-xs px-2 py-0.5 rounded`}
+                  style={
                     line.status === 'OK' || line.status === 'OPTIMAL' || line.status === 'READY'
-                      ? 'bg-terminal-green/20 text-terminal-green'
+                      ? { backgroundColor: 'rgba(87,87,87,0.2)', color: '#575757' }
                       : line.status === 'SECURE'
-                      ? 'bg-azure/20 text-azure'
-                      : 'bg-yellow-500/20 text-yellow-400'
-                  }`}
+                      ? { backgroundColor: 'rgba(0,137,219,0.2)', color: '#0089DB' }
+                      : { backgroundColor: 'rgba(234,179,8,0.2)', color: '#eab308' }
+                  }
                 >
                   [{line.status}]
                 </span>
@@ -144,10 +145,11 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
             {/* Cursor Line */}
             {visibleLines < bootLines.length && (
               <div className="flex items-center gap-2 font-mono text-sm">
-                <span className="text-white/40">[{String(visibleLines + 1).padStart(2, '0')}]</span>
-                <span className="terminal-text">_</span>
+                <span style={{ color: '#0089DB' }}>[{String(visibleLines + 1).padStart(2, '0')}]</span>
+                <span style={{ color: '#575757' }}>_</span>
                 <span
-                  className={`w-2.5 h-5 bg-terminal-green ${showCursor ? 'opacity-100' : 'opacity-0'}`}
+                  className={`w-2.5 h-5 ${showCursor ? 'opacity-100' : 'opacity-0'}`}
+                  style={{ backgroundColor: '#575757' }}
                 />
               </div>
             )}
@@ -156,8 +158,8 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
             {visibleLines === bootLines.length && (
               <div className="mt-6 pt-4 border-t border-white/10 animate-fade-in">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-terminal-green animate-pulse" />
-                  <span className="font-mono text-terminal-green">
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#575757' }} />
+                  <span className="font-mono" style={{ color: '#575757' }}>
                     System Ready. Loading Portfolio Interface...
                   </span>
                 </div>
@@ -179,7 +181,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
           </div>
           <div className="flex items-center gap-4">
             <span>v2.0.25</span>
-            <span className="text-terminal-green">● CONNECTED</span>
+            <span style={{ color: '#575757' }}>● CONNECTED</span>
           </div>
         </div>
       </div>
