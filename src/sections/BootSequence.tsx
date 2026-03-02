@@ -131,7 +131,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
                   className={`text-xs px-2 py-0.5 rounded`}
                   style={
                     line.status === 'OK' || line.status === 'OPTIMAL' || line.status === 'READY'
-                      ? { backgroundColor: 'rgba(87,87,87,0.2)', color: '#575757' }
+                      ? { backgroundColor: 'rgba(0,137,219,0.2)', color: '#0089DB' }
                       : line.status === 'SECURE'
                       ? { backgroundColor: 'rgba(0,137,219,0.2)', color: '#0089DB' }
                       : { backgroundColor: 'rgba(234,179,8,0.2)', color: '#eab308' }
@@ -158,8 +158,8 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
             {visibleLines === bootLines.length && (
               <div className="mt-6 pt-4 border-t border-white/10 animate-fade-in">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#575757' }} />
-                  <span className="font-mono" style={{ color: '#575757' }}>
+                  <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: '#0089DB' }} />
+                  <span className="font-mono" style={{ color: '#0089DB' }}>
                     System Ready. Loading Portfolio Interface...
                   </span>
                 </div>

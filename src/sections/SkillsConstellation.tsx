@@ -53,6 +53,7 @@ export default function SkillsConstellation() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [barsAnimated, setBarsAnimated] = useState(false);
   const constellationRef = useRef<HTMLDivElement>(null);
 
   const filteredSkills = activeCategory === 'All' 
@@ -93,6 +94,8 @@ export default function SkillsConstellation() {
             trigger: constellationRef.current,
             start: 'top 75%',
             toggleActions: 'play none none reverse',
+            onEnter: () => setBarsAnimated(true),
+            onLeaveBack: () => setBarsAnimated(false),
           },
         }
       );
@@ -118,10 +121,12 @@ export default function SkillsConstellation() {
   }, []);
 
   useEffect(() => {
+    setBarsAnimated(false);
     gsap.fromTo(
       '.skill-card',
       { scale: 0.9, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' }
+      { scale: 1, opacity: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out',
+        onComplete: () => setBarsAnimated(true) }
     );
   }, [activeCategory]);
 
@@ -236,10 +241,11 @@ export default function SkillsConstellation() {
                   </div>
                   <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div
-                      className="h-full rounded-full transition-all duration-700"
+                      className="h-full rounded-full"
                       style={{ 
-                        width: `${skill.level}%`,
+                        width: barsAnimated ? `${skill.level}%` : '0%',
                         backgroundColor: skill.barColor,
+                        transition: `width 1s ease ${index * 0.07}s`,
                       }}
                     />
                   </div>
